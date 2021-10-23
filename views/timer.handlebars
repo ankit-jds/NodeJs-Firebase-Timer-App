@@ -1,0 +1,32 @@
+{{name}}
+<form action="/timer/set" method="post">
+    <input type="text" name="name" placeholder="Name" value="Ankit" required>
+    <input type="time" name="time" value="00:07" required>
+    <input type="submit" value="Set the Timer">
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Timer set at</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Message</th>
+            <th scope="col">Timer Off at</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each tabledata}}
+        <tr>
+            <th scope="row">{{@index}}</th>
+            <td>{{username}}</td>
+            <td>{{set_timer_at}}</td>
+            <td>{{duration}}</td>
+            <td>{{content}}</td>
+            <td>{{timer_off_at}}</td>
+
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
