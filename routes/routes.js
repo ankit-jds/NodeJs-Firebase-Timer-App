@@ -1,9 +1,5 @@
 const express = require('express')
 const path = require('path')
-const blogs = require('../data/blogs.js')
-var bodyParser = require('body-parser');
-const multer = require('multer');
-const upload = multer()
 
 const router = express.Router()
 
@@ -57,16 +53,6 @@ router.post('/timer/set', (req, res) => {
     }
     setTimer()
 })
-
-
-router.get('/blogpost/:slug', (req, res) => {
-    console.log(req.params.slug);
-    myBlog = blogs.filter((e) => {
-        return e.slug == req.params.slug
-    })
-    res.send(`${JSON.stringify(myBlog)}`)
-})
-
 
 module.exports = router
 

@@ -7,7 +7,6 @@
     "start" : "node express_index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  
   "author": "Ankit Tamboli",
   "license": "ISC",
   "dependencies": {
