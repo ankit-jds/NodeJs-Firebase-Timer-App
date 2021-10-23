@@ -13,8 +13,6 @@ const { getDatabase, ref, set, get, child } = require("firebase/database");
 
 //fetching service account json
 const serviceAccount = require("./config/express-backend-e65fe-firebase-adminsdk-3z2xt-b19167fd80.json");
-const { nextTick } = require("process");
-const Module = require("module");
 
 //initialise the app, granting admin privileges
 const fire_admin = admin.initializeApp({
@@ -35,7 +33,7 @@ const fireapp = initializeApp(firebaseConfig)
 
 //initialising express app
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 app.engine("handlebars", exhandlers());
 app.set("view engine", "handlebars");
