@@ -1,14 +1,21 @@
 {{name}}
-<form action="/timer/set" method="post">
-    <input type="text" name="name" placeholder="Name" value="Ankit" required>
-    <input type="time" name="time" value="00:07" required>
+<form action="/settimer" method="post">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="time" name="time" required>
+    <input type="text" name="toggle" id="toggle" value="" hidden>
+    <div class="roll-area">
+        <div class="ball">
+            <div class="center"></div>
+            <div class="line"></div>
+        </div>
+    </div>
+    <input type="text" id="timezone" name="timezone" hidden>
     <input type="submit" value="Set the Timer">
 </form>
 
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Timer set at</th>
             <th scope="col">Duration</th>
@@ -19,14 +26,46 @@
     <tbody>
         {{#each tabledata}}
         <tr>
-            <th scope="row">{{@index}}</th>
             <td>{{username}}</td>
-            <td>{{set_timer_at}}</td>
+            <td class="datetime">{{set_timer_at}}</td>
             <td>{{duration}}</td>
-            <td>{{content}}</td>
-            <td>{{timer_off_at}}</td>
+            {{!-- <td>{{content}}</td> --}}
+            <td>
+                <div class="roll-area">
+                    {{#if content}}
+                    <div class="ball animate">
+                        {{else}}
+                        <div class="ball reverse-animate">
+                            {{/if}}
+                            <div class="center"></div>
+                            <div class="line"></div>
+                        </div>
+                    </div>
+            </td>
+            <td class="datetime">{{timer_off_at}}</td>
 
         </tr>
         {{/each}}
     </tbody>
 </table>
+<script>
+    document.getElementById('toggle').addEventListener('click', () => {
+        console.log(document.getElementById('toggle').value)
+    })
+    document.querySelector('.roll-area').addEventListener('click', () => {
+        let toggle = document.getElementById('toggle')
+        let ball = document.querySelector('.ball');
+        if (ball.className == "ball animate") {
+            ball.classList.remove('animate')
+            void ball.offsetWidth;
+            toggle.value = "";
+            ball.classList.add('reverse-animate')
+
+        } else {
+            ball.classList.remove('reverse-animate')
+            void ball.offsetWidth;
+            toggle.value = "true";
+            ball.classList.add('animate')
+        }
+    })
+</script>

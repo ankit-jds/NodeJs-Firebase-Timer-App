@@ -81,7 +81,8 @@ function writeData(data) {
   console.log("Data is written");
 }
 
-function getData(username) {
+function getData() {
+  // console.log("func started...");
   return get(child(ref(db), 'timers/'))
     .then((snapshot) => {
       if (snapshot.exists()) {
@@ -92,32 +93,42 @@ function getData(username) {
       }
     })
     .catch((error) => {
+      console.log("error...123");
       console.error("ERROR:", error);
     });
 }
 
-function setTimer(data) {
+function setTimer(data,timezone) {
   writeData(data)
-  let duration = data.duration.split(":");
-  let ms = parseInt(duration[0]) * 60 +parseInt(duration[1])
-  
-  console.log(duration,ms);
+  console.log(data);
+  let utc=new Date(data.set_timer_at).getTime()
+  console.log(utc,1123);
+  let localtime=new Date().toLocaleString('en-US',{
+    'timeZone':timezone,
+    hour12:false
+  })
+  console.log(localtime);
 
+  var alarmtime=localtime.slice(0,12)+data.duration+":00"
+  let ms=-new Date(localtime).getTime() + new Date(alarmtime).getTime()
+  console.log(ms);
   setTimeout(() => {
-    data.content = "Timer has gone off..."
+    if (data.content){
+      data.content=""
+    }else{
+      data.content="true"
+    }
     data.timer_off_at = now()
     writeData(data)
-  }, ms * 1000)
+  }, ms)
 }
 
 function now() {
-  let currentdate = new Date();
-  let datetime = currentdate.getDate() + "/"
-    + (currentdate.getMonth() + 1) + "/"
-    + currentdate.getFullYear() + " @ "
-    + currentdate.getHours() + ":"
-    + currentdate.getMinutes() + ":"
-    + currentdate.getSeconds();
+  let currentdate = new Date().toLocaleString('en-US',{
+    timeZone:'UTC',
+    hour12:false
+  });
+  let datetime=currentdate
   return datetime
 }
 

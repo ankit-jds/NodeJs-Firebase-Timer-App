@@ -41,5 +41,20 @@ function signout(user) {
   })
 }
 
+let timezone= Intl.DateTimeFormat().resolvedOptions().timeZone;
+document.getElementById('timezone').value=timezone
+console.log(timezone);
+
+var times=document.getElementsByClassName('datetime')
+for (let index = 0; index < times.length; index++) {
+  const time = times[index];
+  if(!time.textContent) continue
+  var date=new Date(time.textContent).getTime()
+  var offset = new Date().getTimezoneOffset()*60000;
+  var newtime=new Date(date-offset).toLocaleString('en-US',{
+    hour12:false
+  })
+  time.textContent=newtime;
+}
 // signIn()
 

@@ -1,0 +1,105 @@
+    :root {
+        --ball-height: 40px;
+        --border-width: calc(var(--ball-height) * 6.5 / 140)
+    }
+
+
+    .roll-area {
+        cursor: pointer;
+        width: calc(var(--ball-height)/2*22/7);
+        height: var(--ball-height);
+        background-color: #12424c;
+        margin: 0 2rem;
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: inline-flex;
+    }
+
+    .roll-area:before {
+        position: absolute;
+        content: "";
+        background-color: #12424c;
+        height: 100%;
+        width: calc(var(--ball-height));
+        border-radius: 50%;
+        left: calc(var(--ball-height)/2*-1);
+        /* opacity:0.351; */
+    }
+
+    .roll-area:after {
+        position: absolute;
+        content: "";
+        background-color: #12424c;
+        height: 100%;
+        width: calc(var(--ball-height));
+        border-radius: 50%;
+        left: calc((var(--ball-height)*2.14/2));
+        /* opacity: 0.351; */
+    }
+
+    .ball {
+        z-index: 2;
+        cursor: pointer;
+        width: var(--ball-height);
+        height: var(--ball-height);
+        background-color: #f22424;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        position: absolute;
+
+        top: 0;
+        bottom: 0;
+        left: calc(-1.57*var(--ball-height));
+        right: 0;
+        border-radius: 50%;
+        border: 3px solid black;
+    }
+
+    .animate,
+    .reverse-animate {
+        animation: roll 0.9s forwards;
+    }
+
+    .reverse-animate {
+        /* animation: rroll 1s forwards; */
+        /* transform: translate(calc(var(--ball-height)/2*22/7), 0); */
+        animation-direction: reverse;
+    }
+
+    /* @keyframes rroll {
+            
+            100% {
+                transform: translate(0, 0) rotate(180deg);
+            }
+        } */
+
+    @keyframes roll {
+        100% {
+            transform: translate(calc(var(--ball-height)/2*22/7), 0) rotate(180deg);
+            background-color: #f224e8;
+
+        }
+    }
+
+    .center {
+        width: calc(var(--ball-height)/4);
+        height: calc(var(--ball-height)/4);
+        border-radius: 50%;
+        background-color: white;
+
+        border: var(--border-width) solid black;
+        z-index: 2;
+    }
+
+    .line {
+        width: calc(var(--ball-height));
+        height: var(--border-width);
+        background-color: black;
+        position: absolute;
+        z-index: 1;
+    }
