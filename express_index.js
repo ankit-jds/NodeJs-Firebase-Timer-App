@@ -97,8 +97,6 @@ function getData() {
       console.error("ERROR:", error);
     });
 }
-
-
 function setTimer(data,timezone) {
   writeData(data)
   console.log(data);
