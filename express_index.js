@@ -97,25 +97,26 @@ function getData() {
       console.error("ERROR:", error);
     });
 }
-function setTimer(data,timezone) {
+
+function setTimer(data, timezone) {
   writeData(data)
   console.log(data);
-  let utc=new Date(data.set_timer_at).getTime()
-  console.log(utc,1123);
-  let localtime=new Date().toLocaleString('en-US',{
-    'timeZone':timezone,
-    hour12:false
+  let utc = new Date(data.set_timer_at).getTime()
+  console.log(utc, 1123);
+  let localtime = new Date().toLocaleString('en-US', {
+    'timeZone': timezone,
+    hour12: false
   })
   console.log(localtime);
 
-  var alarmtime=localtime.slice(0,12)+data.duration+":00"
-  let ms=-new Date(localtime).getTime() + new Date(alarmtime).getTime()
+  var alarmtime = localtime.slice(0, 12) + data.duration + ":00"
+  let ms = -new Date(localtime).getTime() + new Date(alarmtime).getTime()
   console.log(ms);
   setTimeout(() => {
-    if (data.content){
-      data.content=""
-    }else{
-      data.content="true"
+    if (data.content) {
+      data.content = ""
+    } else {
+      data.content = "true"
     }
     data.timer_off_at = now()
     writeData(data)
@@ -123,11 +124,11 @@ function setTimer(data,timezone) {
 }
 
 function now() {
-  let currentdate = new Date().toLocaleString('en-US',{
-    timeZone:'UTC',
-    hour12:false
+  let currentdate = new Date().toLocaleString('en-US', {
+    timeZone: 'UTC',
+    hour12: false
   });
-  let datetime=currentdate
+  let datetime = currentdate
   return datetime
 }
 
