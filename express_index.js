@@ -98,6 +98,7 @@ function getData() {
     });
 }
 
+
 function setTimer(data,timezone) {
   writeData(data)
   console.log(data);
